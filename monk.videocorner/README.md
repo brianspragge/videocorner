@@ -3,6 +3,12 @@
 Search YouTube from the Omarchy bar and pop the selected video into a floating,
 pinned player window.
 
+![VideoCorner controls](showcase-1.png)
+
+![VideoCorner search results](showcase-2.png)
+
+![VideoCorner floating video player](showcase-3.png)
+
 ## Features
 
 - YouTube search through `yt-dlp`
