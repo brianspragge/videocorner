@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "VideoCorner YouTube Player",
+  "version": "1.0.0",
+  "description": "Expands VideoCorner's YouTube player after it loads.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://youtu.be/*"
+      ],
+      "js": ["fullscreen.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

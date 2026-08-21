@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "monk.videocorner",
+  "name": "VideoCorner",
+  "version": "0.9.0",
+  "author": "bms",
+  "license": "MIT",
+  "description": "Search YouTube from the bar and pop out a video player.",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "BarWidget.qml" },
+  "barWidget": {
+    "displayName": "VideoCorner",
+    "category": "Media",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "corner": "top-right",
+      "size": 1
+    }
+  }
+}
