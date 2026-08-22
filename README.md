@@ -23,31 +23,33 @@ Click the **▶** bar icon to open the panel, type to search, then click a video
 or press `Ctrl+1…9` to play it. Move/resize the player from the panel.
 
 ## Keys
-
+While Panel is open
 | Key | Action |
 |---|---|
 | `Ctrl+1…9` | play the numbered video |
-| `↑↓←→` / `h j k l` | move the player to a corner |
+| `Ctrl+↑↓←→` / Ctrl+`h/j/k/l` | move the player around |
 | `Ctrl+=` / `Ctrl+-` | resize up / down |
+| `Ctrl++` / `Ctrl+_` | max/min size |
 | `Ctrl+Q` | close the video |
 | `Esc` / `Ctrl+[` | close the panel (back to main view from results) |
-| `Tab` | switch bar panel |
 
 ## Install
 
-```sh
-omarchy plugin add https://github.com/brianspragge/videocorner.git --enable
+Use Omarchy's SUPER+SPACE->Setup->Plugins->Add Plugin
+and enter the url
+
+```bash
+https://github.com/brianspragge/videocorner.git
 ```
 
 Then register the Chromium extension for the video-only player layout and
-restart Chromium:
+restart Chromium by running:
 
 ```sh
 ~/.config/omarchy/plugins/bms.videocorner/scripts/install-extension.sh
 ```
 
-Add the widget to your bar in `~/.config/omarchy/shell.json` under
-`bar.layout.right`.
+The first video you launch will bug out!  Be patient, install script is setting it up
 
 **Optional: add a keyboard shortcut**
 
@@ -58,26 +60,29 @@ Hyprland keybindings file, `~/.config/hypr/bindings.lua`:
 o.bind("SUPER + CTRL + Y", "VideoCorner", "omarchy-shell shell toggle bms.videocorner")
 ```
 
-Then reload Hyprland (`hyprctl reload` or re-source your config). Clicking the
-**▶** bar icon also works, so this keybind is optional.
+Clicking the **▶** bar icon also works, so this keybind is optional.
 
 ## Requirements
 
-- Omarchy with `omarchy-shell`
+- Omarchy Quattro
 - Chromium
 - `yt-dlp`
 
 ## Remove
 
-```sh
-omarchy plugin remove bms.videocorner
+Run
+
+```bash
 ~/.config/omarchy/plugins/bms.videocorner/scripts/remove-extension.sh
 ```
+Use Omarchy's SUPER+SPACE->Setup->Plugins->Remove Plugin
+ITS GONE like nothing ever happened.
 
 ## Transparency
 
 VideoCorner runs only when you open its panel or play a video. It does not
-intercept or change input for any other application or window.
+intercept or change input for any other application or window.  Extension is
+minimal without peeping at your junk.
 
 **What the extension installer touches**
 
