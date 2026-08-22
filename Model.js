@@ -48,12 +48,33 @@ function globalXY(mon, w, h, corner) {
 
 // ---- results ------------------------------------------------------------------------
 
+// Titles and ids come from YouTube (uploader-controlled) and from Chromium
+// window titles. Treat both as untrusted external input: titles are stripped
+// of control characters and capped before retention/rendering, and ids must
+// match the 11-char YouTube alphabet or they are discarded.
+var MAX_TITLE = 120
+var VID_RE = /^[A-Za-z0-9_-]{11}$/
+
+function sanitizeTitle(raw) {
+  var s = String(raw === undefined || raw === null ? "" : raw)
+  s = s.replace(/[\u0000-\u001f\u007f]/g, " ")
+  return s.length > MAX_TITLE ? s.slice(0, MAX_TITLE) : s
+}
+
+function sanitizeVid(raw) {
+  var s = String(raw === undefined || raw === null ? "" : raw).trim()
+  return VID_RE.test(s) ? s : ""
+}
+
 function parseResults(text) {
   var out = []
   var lines = String(text || "").split("\n")
   for (var i = 0; i < lines.length; i++) {
     var t = lines[i].indexOf("\t")
-    if (t > 0) out.push({ vid: lines[i].slice(0, t).trim(), title: lines[i].slice(t + 1).trim() })
+    if (t <= 0) continue
+    var vid = sanitizeVid(lines[i].slice(0, t))
+    if (!vid) continue
+    out.push({ vid: vid, title: sanitizeTitle(lines[i].slice(t + 1).trim()) })
     if (out.length >= 9) break
   }
   return out
@@ -75,8 +96,14 @@ function gridCells(results) {
   return cells
 }
 
-function thumb(vid) { return "https://i.ytimg.com/vi/" + vid + "/mqdefault.jpg" }
-function url(vid)   { return "https://www.youtube.com/watch?v=" + vid + "&videocorner=1" }
+function thumb(vid) {
+  var v = sanitizeVid(vid)
+  return v ? "https://i.ytimg.com/vi/" + v + "/mqdefault.jpg" : ""
+}
+function url(vid) {
+  var v = sanitizeVid(vid)
+  return v ? "https://www.youtube.com/watch?v=" + v + "&videocorner=1" : ""
+}
 
 // ---- position/size navigation ------------------------------------------------
 
@@ -146,6 +173,8 @@ if (typeof module !== "undefined") {
     gridCells: gridCells,
     thumb: thumb,
     url: url,
+    sanitizeTitle: sanitizeTitle,
+    sanitizeVid: sanitizeVid,
     nextCorner: nextCorner,
     stepSize: stepSize,
     SIZES: SIZES

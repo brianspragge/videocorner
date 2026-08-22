@@ -34,9 +34,11 @@ Item {
   }
 
   function play(vid, title) {
-    root.currentTitle = title; root.pendingVid = vid
+    var cleanVid = Model.sanitizeVid(vid)
+    if (!cleanVid) return
+    root.currentTitle = Model.sanitizeTitle(title); root.pendingVid = cleanVid
     // Non-blocking aspect detection for the selected video.
-    root.aspectVid = vid
+    root.aspectVid = cleanVid
     if (aspectProc.running) aspectProc.running = false
     aspectProc.running = true
     if (root.monitors.length === 0) {
@@ -87,7 +89,7 @@ Item {
     onExited: function(code) {
       if (code === 0) {
         root.playing = true
-        root.currentTitle = stdout.captured
+        root.currentTitle = Model.sanitizeTitle(stdout.captured)
         pollTimer.restart()
       }
     }

@@ -61,6 +61,7 @@ Item {
       spacing: Style.space(8)
       Text {
         text: "󰐊 " + root.currentTitle
+        textFormat: Text.PlainText
         width: parent.width - closeBtn.implicitWidth - Style.space(8)
         elide: Text.ElideRight
         color: Qt.darker(root.foreground, 1.3)

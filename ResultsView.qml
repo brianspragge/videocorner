@@ -122,6 +122,7 @@ Item {
 
               Text {
                 text: card.modelData ? card.modelData.title : ""
+                textFormat: Text.PlainText
                 width: parent.width
                 wrapMode: Text.WordWrap
                 maximumLineCount: 2

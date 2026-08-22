@@ -34,17 +34,38 @@ assert.strictEqual(M.pickMonitor([mon], "missing").name, "eDP-1");
 assert.strictEqual(M.pickMonitor([], "eDP-1"), undefined);
 
 // ---- search parsing ----
-assert.deepStrictEqual(M.parseResults("abc123\tMy Video\nxyz789\tAnother\n"), [
-  { vid: "abc123", title: "My Video" },
-  { vid: "xyz789", title: "Another" }
+assert.deepStrictEqual(M.parseResults("dQw4w9WgXcQ\tMy Video\naBcDeFgHiJk\tAnother\n"), [
+  { vid: "dQw4w9WgXcQ", title: "My Video" },
+  { vid: "aBcDeFgHiJk", title: "Another" }
 ]);
 assert.deepStrictEqual(M.parseResults(""), []);
-assert.strictEqual(M.url("abc123"), "https://www.youtube.com/watch?v=abc123&videocorner=1");
+assert.strictEqual(M.url("dQw4w9WgXcQ"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ&videocorner=1");
 
 // ---- results cap at 9 ----
 var tenLines = ""
-for (var li = 0; li < 10; li++) tenLines += "vid" + li + "\tTitle " + li + "\n"
+for (var li = 0; li < 10; li++) tenLines += ("vvvvvvvvvvv" + li).slice(-11) + "\tTitle " + li + "\n"
 assert.strictEqual(M.parseResults(tenLines).length, 9);
+
+// ---- untrusted input hardening ----
+// ids outside the 11-char YouTube alphabet are dropped from results
+assert.deepStrictEqual(M.parseResults("abc123\tShort id\n\txyz\n"), []);
+// markup-shaped titles are retained as inert literal text (sinks render PlainText)
+var markup = M.parseResults("dQw4w9WgXcQ\t<b>Bold</b> <img src=\"http://evil/a.png\">\n");
+assert.strictEqual(markup.length, 1);
+assert.strictEqual(markup[0].title, "<b>Bold</b> <img src=\"http://evil/a.png\">");
+// control characters never reach retained strings
+assert.strictEqual(M.sanitizeTitle("A\u0007B\u001fC\nD"), "A B C D");
+// titles are capped
+assert.strictEqual(M.sanitizeTitle(new Array(300).join("x")).length, 120);
+// vid validation: exactly 11 chars of [A-Za-z0-9_-], trimmed
+assert.strictEqual(M.sanitizeVid("  dQw4w9WgXcQ "), "dQw4w9WgXcQ");
+assert.strictEqual(M.sanitizeVid("short"), "");
+assert.strictEqual(M.sanitizeVid("twelvechars!"), "");
+assert.strictEqual(M.sanitizeVid(""), "");
+// url/thumb refuse invalid ids instead of building odd URLs
+assert.strictEqual(M.url("bad"), "");
+assert.strictEqual(M.thumb("bad"), "");
+assert.strictEqual(M.thumb("dQw4w9WgXcQ"), "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg");
 
 // ---- 3x3 grid in numpad order: bottom 1 2 3, middle 4 5 6, top 7 8 9 ----
 var nine = []
