@@ -6,7 +6,7 @@ import subprocess
 import sys
 import time
 
-PLUGIN_ID = "monk.videocorner"
+PLUGIN_ID = "bms.videocorner"
 STATE_DIR = os.path.join(os.environ.get("XDG_RUNTIME_DIR", ""), PLUGIN_ID)
 STATE_FILE = os.path.join(STATE_DIR, "player.address")
 WATCHDOG_CLOSE = 5

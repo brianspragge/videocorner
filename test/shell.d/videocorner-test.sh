@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pure-logic tests for monk.videocorner Model.js, runnable under node.
+# Pure-logic tests for bms.videocorner Model.js, runnable under node.
 set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MODEL="$DIR/Model.js"
@@ -87,5 +87,5 @@ assert.strictEqual(M.stepSize(0.5, -1), 0.5);     // clamped at min
 assert.strictEqual(M.stepSize(1.7, 1), 2);        // unknown snaps to nearest, then steps
 assert.strictEqual(M.stepSize(1.7, -1), 1);
 
-console.log("all monk.videocorner model tests passed");
+console.log("all bms.videocorner model tests passed");
 EOF

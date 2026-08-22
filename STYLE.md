@@ -1,6 +1,6 @@
 # Omarchy Plugin Style Guide
 
-Shared conventions for `monk.videocorner` and `monk.gofind`. Both plugins must
+Shared conventions for `bms.videocorner` and `bms.gofind`. Both plugins must
 follow these rules so they read as one consistent codebase.
 
 ## 1. File header comments

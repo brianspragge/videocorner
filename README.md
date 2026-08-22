@@ -43,7 +43,7 @@ Then register the Chromium extension for the video-only player layout and
 restart Chromium:
 
 ```sh
-~/.config/omarchy/plugins/monk.videocorner/scripts/install-extension.sh
+~/.config/omarchy/plugins/bms.videocorner/scripts/install-extension.sh
 ```
 
 Add the widget to your bar in `~/.config/omarchy/shell.json` under
@@ -55,7 +55,7 @@ To open and close VideoCorner from anywhere, add this line to your personal
 Hyprland keybindings file, `~/.config/hypr/bindings.lua`:
 
 ```lua
-o.bind("SUPER + CTRL + Y", "VideoCorner", "omarchy-shell shell toggle monk.videocorner")
+o.bind("SUPER + CTRL + Y", "VideoCorner", "omarchy-shell shell toggle bms.videocorner")
 ```
 
 Then reload Hyprland (`hyprctl reload` or re-source your config). Clicking the
@@ -70,8 +70,8 @@ Then reload Hyprland (`hyprctl reload` or re-source your config). Clicking the
 ## Remove
 
 ```sh
-omarchy plugin remove monk.videocorner
-~/.config/omarchy/plugins/monk.videocorner/scripts/remove-extension.sh
+omarchy plugin remove bms.videocorner
+~/.config/omarchy/plugins/bms.videocorner/scripts/remove-extension.sh
 ```
 
 ## Transparency

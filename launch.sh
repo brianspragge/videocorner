@@ -7,7 +7,7 @@ Y="$3"
 W="$4"
 H="$5"
 
-PLUGIN_DIR="$HOME/.config/omarchy/plugins/monk.videocorner"
+PLUGIN_DIR="$HOME/.config/omarchy/plugins/bms.videocorner"
 
 if ! python3 "$PLUGIN_DIR/player-ipc.py" close; then
     exit 1

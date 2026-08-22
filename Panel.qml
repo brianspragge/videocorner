@@ -11,8 +11,8 @@ import "Model.js" as Model
 // Sub-views report their implicitHeight; services report results.
 Panel {
   id: root
-  moduleName: "monk.videocorner"
-  ipcTarget: "monk.videocorner"
+  moduleName: "bms.videocorner"
+  ipcTarget: "bms.videocorner"
   manageIpc: false
 
   property var anchorItem: null

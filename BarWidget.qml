@@ -10,7 +10,7 @@ import qs.Ui
 // contract the clock and gofind widgets use.
 BarWidget {
   id: root
-  moduleName: "monk.videocorner"
+  moduleName: "bms.videocorner"
 
   readonly property bool opened: panelLoader.item
     ? panelLoader.item.opened === true
@@ -62,7 +62,7 @@ BarWidget {
   }
 
   IpcHandler {
-    target: "monk.videocorner"
+    target: "bms.videocorner"
 
     function open(): void { root.open() }
     function close(): void { root.close() }

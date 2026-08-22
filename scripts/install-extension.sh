@@ -5,7 +5,7 @@
 set -euo pipefail
 
 FLAGS_FILE="${CHROMIUM_FLAGS_FILE:-$HOME/.config/chromium-flags.conf}"
-EXT_PATH="$HOME/.config/omarchy/plugins/monk.videocorner/chrome-extension"
+EXT_PATH="$HOME/.config/omarchy/plugins/bms.videocorner/chrome-extension"
 
 if [[ ! -f "$FLAGS_FILE" ]]; then
   echo "--load-extension=$EXT_PATH" >"$FLAGS_FILE"

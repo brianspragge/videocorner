@@ -1,4 +1,4 @@
-// Pure geometry/position logic for the monk.videocorner player panel.
+// Pure geometry/position logic for the bms.videocorner player panel.
 // Everything here is Qt-free so it can be unit tested under node
 // (test/shell.d/videocorner-test.sh); the QML owns UI, key handling,
 // and Process runs.
