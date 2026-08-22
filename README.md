@@ -1,7 +1,7 @@
 # VideoCorner
 
 Search YouTube from the Omarchy bar and pop the selected video into a floating,
-pinned player window.
+pinned, movable player window.
 
 ![VideoCorner controls](showcase-1.png)
 

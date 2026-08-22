@@ -7,11 +7,17 @@ set -euo pipefail
 FLAGS_FILE="${CHROMIUM_FLAGS_FILE:-$HOME/.config/chromium-flags.conf}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EXT_PATH="$(realpath -m "$SCRIPT_DIR/../chrome-extension")"
+AUTOPLAY_FLAG="--autoplay-policy=no-user-gesture-required"
 
 if [[ ! -f "$FLAGS_FILE" ]]; then
-  echo "--load-extension=$EXT_PATH" >"$FLAGS_FILE"
-  echo "Created $FLAGS_FILE with the VideoCorner extension."
+  printf '%s\n' "--load-extension=$EXT_PATH" "$AUTOPLAY_FLAG" >"$FLAGS_FILE"
+  echo "Created $FLAGS_FILE with the VideoCorner settings."
   exit 0
+fi
+
+if ! grep -Fqx -- "$AUTOPLAY_FLAG" "$FLAGS_FILE"; then
+  printf '%s\n' "$AUTOPLAY_FLAG" >>"$FLAGS_FILE"
+  echo "Registered the VideoCorner autoplay policy in $FLAGS_FILE."
 fi
 
 if grep -q -- "$EXT_PATH" "$FLAGS_FILE"; then
