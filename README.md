@@ -33,6 +33,12 @@ While Panel is open
 | `Ctrl+Q` | close the video |
 | `Esc` / `Ctrl+[` | close the panel (back to main view from results) |
 
+## Requirements
+
+- Omarchy Quattro
+- Chromium
+- `yt-dlp` which uses an api to search for youtube videos
+
 ## Install
 
 Use Omarchy's SUPER+SPACE->Setup->Plugins->Add Plugin
@@ -49,8 +55,6 @@ restart Chromium by running:
 ~/.config/omarchy/plugins/bms.videocorner/scripts/install-extension.sh
 ```
 
-The first video you launch will bug out!  Be patient, install script is setting it up
-
 **Optional: add a keyboard shortcut**
 
 To open and close VideoCorner from anywhere, add this line to your personal
@@ -61,12 +65,6 @@ o.bind("SUPER + CTRL + Y", "VideoCorner", "omarchy-shell shell toggle bms.videoc
 ```
 
 Clicking the **▶** bar icon also works, so this keybind is optional.
-
-## Requirements
-
-- Omarchy Quattro
-- Chromium
-- `yt-dlp`
 
 ## Remove
 
@@ -107,7 +105,8 @@ The `install-extension.sh` script edits exactly one file:
 
 The bundled Chromium extension only activates for URLs containing
 `videocorner=1` (your selected video). Regular YouTube tabs and all other sites
-are unaffected.
+are unaffected.  It isn't necessary, but then you will have to manually enlarge
+every video you search for.  The extension removes all the youtube page css junk.
 
 **Removal**
 
