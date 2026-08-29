@@ -75,12 +75,14 @@ assert.strictEqual(cells.length, 9);
 assert.deepStrictEqual(cells.map(function (c) { return c.number }), [7, 8, 9, 4, 5, 6, 1, 2, 3]);
 assert.deepStrictEqual(cells.map(function (c) { return c.vid }), ["v6", "v7", "v8", "v3", "v4", "v5", "v0", "v1", "v2"]);
 
-// partial results: only existing numbers fill their numpad slots, rest null
+// partial results: explicit placeholders preserve all nine numpad slots
 var partial = M.gridCells(nine.slice(0, 4))
-assert.deepStrictEqual(partial.map(function (c) { return c ? c.number : null }), [null, null, null, 4, null, null, 1, 2, 3]);
+assert.deepStrictEqual(partial.map(function (c) { return c.empty ? null : c.number }), [null, null, null, 4, null, null, 1, 2, 3]);
+assert.strictEqual(partial.length, 9);
 
-// empty search -> all null
-assert.deepStrictEqual(M.gridCells([]).map(function (c) { return c }), [null, null, null, null, null, null, null, null, null]);
+// empty search -> nine explicit placeholders
+assert.strictEqual(M.gridCells([]).length, 9);
+assert.ok(M.gridCells([]).every(function (c) { return c.empty }));
 
 // ---- position grid (no wrap at edges, center skipped) ----
 assert.strictEqual(M.nextCorner("top", 0, 1), "bottom");          // steps through center

@@ -82,8 +82,8 @@ function parseResults(text) {
 
 // 3x3 results grid laid out in numpad order: bottom row 1 2 3, middle 4 5 6,
 // top row 7 8 9. `visualIndex` maps grid position (top row first) to the
-// search-result index; each cell is `{ vid, title, number }` where number is
-// the 1-based search order, or null when fewer than 9 results are available.
+// search-result index; each cell is `{ vid, title, number }`, or an explicit
+// `{ empty: true }` placeholder when fewer than 9 results are available.
 function gridCells(results) {
   var visualIndex = [6, 7, 8, 3, 4, 5, 0, 1, 2]
   var cells = []
@@ -91,7 +91,7 @@ function gridCells(results) {
     var src = visualIndex[i]
     cells.push(src < results.length
       ? { vid: results[src].vid, title: results[src].title, number: src + 1 }
-      : null)
+      : { empty: true })
   }
   return cells
 }
